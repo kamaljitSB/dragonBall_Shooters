@@ -151,8 +151,9 @@ class Winner():
 
 
 class Window():
-    def __init__(self, screen, screen_border, screen_width, screen_height, vegeta_char, goku_char, goku_img, vegeta_img, goku_ki_blast, vegeta_ki_blast, vegeta_health, goku_health, health_font):
-        # super().__init__(Goku.screen, Goku.char_width, Goku.char_height)
+    def __init__(self, screen, screen_border, screen_width, screen_height, vegeta_char, goku_char,
+                 goku_img, vegeta_img, goku_ki_blast, vegeta_ki_blast, vegeta_health, goku_health, health_font):
+
         self.screen = screen
 
         self.screen_border = screen_border
@@ -195,10 +196,10 @@ def main():
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Dragon Ball Shooter")
 
-    WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0)
-    RED = (255, 0, 0)
-    YELLOW = (255, 255, 0)
+    # WHITE = (255, 255, 255)
+    # BLACK = (0, 0, 0)
+    # RED = (255, 0, 0)
+    # YELLOW = (255, 255, 0)
 
     screen_border = pygame.Rect(screen_width//2-5, 0, 10, screen_height)
 
@@ -226,7 +227,7 @@ def main():
     clock = pygame.time.Clock()
     background_music = pygame.mixer.Sound(
         "Assets/dragon_ball_super_background.mp3")
-    background_music.set_volume(0.25)
+    background_music.set_volume(0.20)
     background_music.play(loops=-1)
     run = 1
     while run:
@@ -251,15 +252,9 @@ def main():
 
             if event.type == Vegeta_HIT:
                 vegeta_health -= 1
-                # vegeta_hit_sound = pygame.mixer.Sound(
-                #     'Assets/vegeta_sound.mp3')
-                # vegeta_hit_sound.play()
 
             if event.type == Goku_HIT:
                 goku_health -= 1
-                # goku_hit_sound = pygame.mixer.Sound(
-                #     'Assets/goku_scream.mp3')
-                # goku_hit_sound.play()
 
         winner_text = ""
 
@@ -268,15 +263,17 @@ def main():
 
         if goku_health < 0:
             winner_text = "The Almighty Prince Wins"
-            vegeta_win = pygame.mixer.Sound(
-                'Assets/I am Prince of all sayains (1).mp3')
-            vegeta_win.play()
+            # vegeta_win = pygame.mixer.Sound(
+            #     'Assets/I am Prince of all sayains (1).mp3')
+            # vegeta_win.play()
 
         if winner_text != "":
             # draw_winner(winner_text)
             draw_text = Winner_font.render(winner_text, 1, (255, 0, 0))
-            screen.blit(draw_text, (screen_width/2 - draw_text.get_width() /
-                                    2, screen_height/2 - draw_text.get_height()/2))
+            displayn_text = screen.blit(draw_text, (screen_width/2 - draw_text.get_width() /
+                                                    2, screen_height/2 - draw_text.get_height()/2))
+
+            pygame.display.update()
             background_music.stop()
             pygame.display.update()
             pygame.time.delay(3500)
